@@ -1,0 +1,155 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.ibanfox.com/v1'
+info:
+  description: A simple API to validate an IBAN
+  version: 1.0.0
+  title: IBAN Validator
+  contact:
+    email: hello@ibanfox.com
+    name: IBANfox Support
+    url: 'https://ibanfox.com/contact'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  termsOfService: 'https://ibanfox.com/terms'
+tags:
+  - name: iban
+paths:
+  /ibans:
+    get:
+      summary: Validates an IBAN
+      operationId: validateIBAN
+      description: 'Given a candidate IBAN, returns the results of a validation, along with a suite of validation checks.'
+      parameters:
+        - in: query
+          name: iban
+          description: The IBAN to validate
+          required: true
+          schema:
+            type: string
+      tags:
+        - iban
+      responses:
+        '200':
+          description: IBAN passed validation
+          content:
+            application/json:
+              schema:
+                type: object
+                description: The requested IBAN
+                properties:
+                  iban:
+                    type: string
+                  valid:
+                    type: boolean
+                  status:
+                    $ref: '#/components/schemas/status'
+                  valid_more:
+                    $ref: '#/components/schemas/validation-suite'
+                required:
+                  - iban
+                  - status
+                  - valid
+              examples:
+                Example: {}
+            application/xml:
+              schema:
+                type: string
+                description: The requested IBAN
+        '422':
+          description: IBAN failed validation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    $ref: '#/components/schemas/status'
+                  valid_more:
+                    $ref: '#/components/schemas/validation-suite'
+                  valid:
+                    type: boolean
+                  iban:
+                    type: string
+                required:
+                  - status
+                  - valid
+                  - iban
+    parameters: []
+components:
+  schemas:
+    iban-details:
+      title: IBAN-Details
+      type: object
+      x-tags:
+        - iban
+      properties:
+        account_number:
+          type: string
+          description: The remainder of the IBAN including the account number.
+        bank_id:
+          type: string
+          description: The BANK ID extracted from the IBAN.
+        branch_id:
+          type: string
+          description: Unique and unambiguous identification of a branch of a financial institutionn
+        checksum:
+          type: string
+          description: The checksum extracted from the IBAN
+        country_code:
+          type: string
+          description: The ISO 3166-1 alpha-2 code of the country of the institution/branch.
+        iban:
+          type: string
+          description: The IBAN that was validated
+        length:
+          type: string
+          description: The length of the IBAN
+        status:
+          type: string
+      description: (SWIFTRef compatible)
+    validation-suite:
+      title: Validation suite
+      type: object
+      x-examples: {}
+      x-tags:
+        - iban
+      description: ''
+      properties:
+        country_valid:
+          type: boolean
+        bban_length_valid:
+          type: boolean
+        iban_length_valid:
+          type: boolean
+        bban_format_valid:
+          type: boolean
+        iban_format_valid:
+          type: boolean
+        checksum_valid:
+          type: boolean
+        national_checksum_valid:
+          type: boolean
+    status:
+      title: Status
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        more_info:
+          type: string
+      x-tags:
+        - iban
+  securitySchemes:
+    key:
+      name: API Key
+      type: apiKey
+      in: query
+externalDocs:
+  description: IBANfox Documentation
+  url: 'https://ibanfox.com/docs'
+security:
+  - key: []
