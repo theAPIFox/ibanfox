@@ -64,18 +64,14 @@ paths:
               schema:
                 type: object
                 properties:
+                  iban:
+                    type: string
+                  valid:
+                    type: boolean
                   status:
                     $ref: '#/components/schemas/status'
                   valid_more:
                     $ref: '#/components/schemas/validation-suite'
-                  valid:
-                    type: boolean
-                  iban:
-                    type: string
-                required:
-                  - status
-                  - valid
-                  - iban
     parameters: []
 components:
   schemas:
@@ -119,18 +115,28 @@ components:
       properties:
         country_valid:
           type: boolean
+          description: Is a valid two-letter country code provided?
         bban_length_valid:
           type: boolean
+          description: Is the BBAN implicit in the IBAN of a valid length for the country?
         iban_length_valid:
           type: boolean
+          description: Is the IBAN length valid for the country?
         bban_format_valid:
           type: boolean
+          description: Is the BBAN implicit in the IBAN of a valid format for the country?
         iban_format_valid:
           type: boolean
+          description: Is the IBAN format valid?
         checksum_valid:
           type: boolean
+          description: Is the IBAN checksum valid?
         national_checksum_valid:
           type: boolean
+          description: Is the national checksum valid for the country?
+        iban_suggest:
+          type: string
+          description: 'In case of a failed validation, this field attempts to provide a workable correction. Do not take this suggestion too seriously, and certainly DO NOT RELY ON IT for transferring funds.'
     status:
       title: Status
       type: object
