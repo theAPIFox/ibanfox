@@ -5,7 +5,7 @@ IBANfox offers a simple REST-based JSON API enabling you to check the validity o
 
 In its current state, IBANfox is an proof-of-concept for more capabilities to come.
 
-IBANfox makes a valiant attempt at "did you mean" suggestions, but these should not be taken too seriously
+IBANfox makes a valiant attempt at "did you mean" suggestions, but these should not be taken too seriously.
 
 [Sign up for for free](https://ibanfox.com/register) to get instant API Access.
 
