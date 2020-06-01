@@ -18,7 +18,7 @@ tags:
 paths:
   /ibans:
     get:
-      summary: Validates an IBAN
+      summary: Validate an IBAN
       operationId: validateIBAN
       description: 'Given a candidate IBAN, returns the results of a validation, along with a suite of validation checks.'
       parameters:
@@ -51,6 +51,24 @@ paths:
                   - iban
                   - valid
                   - status
+              examples:
+                Example:
+                  value:
+                    iban: DE89370400440532013000
+                    valid: 'true'
+                    status:
+                      code: '200'
+                      message: OK
+                      more_info: ''
+                    valid_more:
+                      country_valid: 'true'
+                      bban_length_valid: 'true'
+                      iban_length_valid: 'true'
+                      bban_format_valid: 'true'
+                      iban_format_valid: 'true'
+                      checksum_valid: 'true'
+                      national_checksum_valid: 'true'
+                      iban_suggest: ''
             application/xml:
               schema:
                 type: string
