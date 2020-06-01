@@ -31,12 +31,14 @@ paths:
             application/json:
               schema:
                 type: object
-                description: The requested IBAN
+                description: ''
                 properties:
                   iban:
                     type: string
+                    description: The IBAN to validate
                   valid:
                     type: boolean
+                    description: Is the IBAN valid?
                   meta:
                     $ref: '#/components/schemas/Meta'
                   valid_more:
@@ -113,10 +115,12 @@ components:
       type: object
       x-examples: {}
       description: ''
+      x-tags:
+        - models
       properties:
         country_valid:
           type: boolean
-          description: Is a valid two-letter country code provided?
+          description: Do first two characters represent a valid IBAN country?
         bban_length_valid:
           type: boolean
           description: Is the BBAN implicit in the IBAN of a valid length for the country?
@@ -129,7 +133,7 @@ components:
         iban_format_valid:
           type: boolean
           description: Is the IBAN format valid?
-        checksum_valid:
+        iban_checksum_valid:
           type: boolean
           description: Is the IBAN checksum valid?
         national_checksum_valid:
@@ -138,20 +142,21 @@ components:
         iban_suggest:
           type: string
           description: 'In case of a failed validation, this field attempts to provide a workable correction. Do not take this suggestion too seriously, and certainly DO NOT RELY ON IT for transferring funds.'
-      x-tags:
-        - models
     Meta:
       title: Meta
       type: object
+      x-tags:
+        - models
       properties:
         code:
           type: string
+          description: REST HTTP response code
         message:
           type: string
+          description: REST HTTP response description
         more_info:
           type: string
-      x-tags:
-        - models
+          description: 'More information about the result, if available'
   securitySchemes:
     apiKey:
       name: apiKey
