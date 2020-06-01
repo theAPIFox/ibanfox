@@ -159,6 +159,7 @@ components:
       name: apiKey
       type: apiKey
       in: query
+      description: 'To use this API, an API key is required. Get one for free at [https://ibanfox.com/register](https://ibanfox.com/register).'
 externalDocs:
   description: IBANfox Documentation
   url: 'https://ibanfox.com/docs'
