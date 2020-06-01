@@ -154,8 +154,8 @@ components:
       x-tags:
         - models
   securitySchemes:
-    key:
-      name: Key
+    apiKey:
+      name: apiKey
       type: apiKey
       in: query
 externalDocs:
