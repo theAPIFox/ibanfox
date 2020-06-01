@@ -52,7 +52,7 @@ paths:
                   - valid
                   - meta
               examples:
-                Example of successful call:
+                Example of passed validation:
                   value:
                     iban: DE89370400440532013000
                     valid: 'true'
@@ -89,7 +89,7 @@ paths:
                   valid_more:
                     $ref: '#/components/schemas/Validations'
               examples:
-                Example of failed call:
+                Example of failed validation:
                   value:
                     iban: DX89370400440532013000
                     valid: 'false'
