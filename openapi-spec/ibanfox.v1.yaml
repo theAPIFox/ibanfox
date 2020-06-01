@@ -65,10 +65,6 @@ paths:
                       iban_checksum_valid: 'true'
                       national_checksum_valid: 'true'
                       iban_suggest: ''
-            application/xml:
-              schema:
-                type: string
-                description: The requested IBAN
         '422':
           description: IBAN failed validation
           content:
