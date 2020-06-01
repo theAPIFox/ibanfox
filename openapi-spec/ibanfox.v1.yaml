@@ -43,14 +43,14 @@ paths:
                     type: string
                   valid:
                     type: boolean
-                  status:
-                    $ref: '#/components/schemas/Status'
+                  meta:
+                    $ref: '#/components/schemas/Meta'
                   valid_more:
                     $ref: '#/components/schemas/Validations'
                 required:
                   - iban
                   - valid
-                  - status
+                  - meta
               examples:
                 Example:
                   value:
@@ -66,7 +66,7 @@ paths:
                       iban_length_valid: 'true'
                       bban_format_valid: 'true'
                       iban_format_valid: 'true'
-                      checksum_valid: 'true'
+                      iban_checksum_valid: 'true'
                       national_checksum_valid: 'true'
                       iban_suggest: ''
             application/xml:
@@ -84,8 +84,8 @@ paths:
                     type: string
                   valid:
                     type: boolean
-                  status:
-                    $ref: '#/components/schemas/Status'
+                  meta:
+                    $ref: '#/components/schemas/Meta'
                   valid_more:
                     $ref: '#/components/schemas/Validations'
     parameters: []
@@ -123,8 +123,8 @@ components:
           description: 'In case of a failed validation, this field attempts to provide a workable correction. Do not take this suggestion too seriously, and certainly DO NOT RELY ON IT for transferring funds.'
       x-tags:
         - models
-    Status:
-      title: Status
+    Meta:
+      title: Meta
       type: object
       properties:
         code:
