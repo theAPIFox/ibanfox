@@ -98,6 +98,8 @@ paths:
                       iban_checksum_valid: 'false'
                       national_checksum_valid: 'false'
                       iban_suggest: DE89370400440532013000
+      security:
+        - apiKey: []
     parameters:
       - schema:
           type: string
