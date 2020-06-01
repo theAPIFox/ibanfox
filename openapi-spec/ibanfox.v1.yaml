@@ -11,7 +11,7 @@ info:
     url: 'https://ibanfox.com/contact'
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
   termsOfService: 'https://ibanfox.com/terms'
 tags:
   - name: iban
@@ -44,15 +44,13 @@ paths:
                   valid:
                     type: boolean
                   status:
-                    $ref: '#/components/schemas/status'
+                    $ref: '#/components/schemas/Status'
                   valid_more:
-                    $ref: '#/components/schemas/validation-suite'
+                    $ref: '#/components/schemas/Validations'
                 required:
                   - iban
-                  - status
                   - valid
-              examples:
-                Example: {}
+                  - status
             application/xml:
               schema:
                 type: string
@@ -69,43 +67,13 @@ paths:
                   valid:
                     type: boolean
                   status:
-                    $ref: '#/components/schemas/status'
+                    $ref: '#/components/schemas/Status'
                   valid_more:
-                    $ref: '#/components/schemas/validation-suite'
+                    $ref: '#/components/schemas/Validations'
     parameters: []
 components:
   schemas:
-    iban-details:
-      title: IBAN-Details
-      type: object
-      x-tags:
-        - iban
-      properties:
-        account_number:
-          type: string
-          description: The remainder of the IBAN including the account number.
-        bank_id:
-          type: string
-          description: The BANK ID extracted from the IBAN.
-        branch_id:
-          type: string
-          description: Unique and unambiguous identification of a branch of a financial institutionn
-        checksum:
-          type: string
-          description: The checksum extracted from the IBAN
-        country_code:
-          type: string
-          description: The ISO 3166-1 alpha-2 code of the country of the institution/branch.
-        iban:
-          type: string
-          description: The IBAN that was validated
-        length:
-          type: string
-          description: The length of the IBAN
-        status:
-          type: string
-      description: (SWIFTRef compatible)
-    validation-suite:
+    Validations:
       title: Validation suite
       type: object
       x-examples: {}
@@ -137,7 +105,7 @@ components:
         iban_suggest:
           type: string
           description: 'In case of a failed validation, this field attempts to provide a workable correction. Do not take this suggestion too seriously, and certainly DO NOT RELY ON IT for transferring funds.'
-    status:
+    Status:
       title: Status
       type: object
       properties:
@@ -151,11 +119,11 @@ components:
         - iban
   securitySchemes:
     key:
-      name: API Key
+      name: Key
       type: apiKey
       in: query
 externalDocs:
   description: IBANfox Documentation
   url: 'https://ibanfox.com/docs'
 security:
-  - key: []
+  - API Key - 1: []
