@@ -16,18 +16,12 @@ info:
 tags:
   - name: iban
 paths:
-  /ibans:
+  '/ibans/{iban}/validate':
     get:
       summary: Validate an IBAN
       operationId: validateIBAN
       description: 'Given a candidate IBAN, returns the results of a validation, along with a suite of validation checks.'
-      parameters:
-        - in: query
-          name: iban
-          description: The IBAN to validate
-          required: true
-          schema:
-            type: string
+      parameters: []
       tags:
         - iban
       responses:
@@ -106,7 +100,12 @@ paths:
                       iban_checksum_valid: 'false'
                       national_checksum_valid: 'false'
                       iban_suggest: DE89370400440532013000
-    parameters: []
+    parameters:
+      - schema:
+          type: string
+        name: iban
+        in: path
+        required: true
 components:
   schemas:
     Validations:
