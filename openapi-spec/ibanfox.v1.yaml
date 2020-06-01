@@ -104,6 +104,7 @@ paths:
         name: iban
         in: path
         required: true
+        description: A candidate IBAN to validate
 components:
   schemas:
     Validations:
