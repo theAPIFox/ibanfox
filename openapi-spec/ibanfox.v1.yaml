@@ -52,7 +52,7 @@ paths:
                   - valid
                   - meta
               examples:
-                Example:
+                Example of successful call:
                   value:
                     iban: DE89370400440532013000
                     valid: 'true'
@@ -88,6 +88,24 @@ paths:
                     $ref: '#/components/schemas/Meta'
                   valid_more:
                     $ref: '#/components/schemas/Validations'
+              examples:
+                Example of failed call:
+                  value:
+                    iban: DX89370400440532013000
+                    valid: 'false'
+                    status:
+                      code: '422'
+                      message: Unprocessable Entity
+                      more_info: 'Input is not a valid IBAN. See valid_more for more information, if available.'
+                    valid_more:
+                      country_valid: 'false'
+                      bban_length_valid: 'false'
+                      iban_length_valid: 'false'
+                      bban_format_valid: 'false'
+                      iban_format_valid: 'false'
+                      iban_checksum_valid: 'false'
+                      national_checksum_valid: 'false'
+                      iban_suggest: DE89370400440532013000
     parameters: []
 components:
   schemas:
