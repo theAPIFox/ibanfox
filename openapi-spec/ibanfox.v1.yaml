@@ -1,0 +1,167 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.ibanfox.com/v1'
+info:
+  description: A simple API to validate an IBAN
+  version: 1.0.0
+  title: IBAN Validator
+  contact:
+    email: hello@ibanfox.com
+    name: IBANfox Support
+    url: 'https://ibanfox.com/contact'
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+  termsOfService: 'https://ibanfox.com/terms'
+tags:
+  - name: iban
+paths:
+  '/ibans/{iban}/validate':
+    get:
+      summary: Validate an IBAN
+      operationId: validateIBAN
+      description: 'Given a candidate IBAN, returns the result of a validation, along with a suite of validation checks.'
+      parameters: []
+      tags:
+        - iban
+      responses:
+        '200':
+          description: IBAN passed validation
+          content:
+            application/json:
+              schema:
+                type: object
+                description: ''
+                properties:
+                  iban:
+                    type: string
+                    description: The IBAN to validate
+                  valid:
+                    type: boolean
+                    description: Is the IBAN valid?
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  valid_more:
+                    $ref: '#/components/schemas/Validations'
+                required:
+                  - iban
+                  - valid
+                  - meta
+              examples:
+                Example of passed validation:
+                  value:
+                    iban: DE89370400440532013000
+                    valid: 'true'
+                    status:
+                      code: '200'
+                      message: OK
+                      more_info: ''
+                    valid_more:
+                      country_valid: 'true'
+                      bban_length_valid: 'true'
+                      iban_length_valid: 'true'
+                      bban_format_valid: 'true'
+                      iban_format_valid: 'true'
+                      iban_checksum_valid: 'true'
+                      national_checksum_valid: 'true'
+                      iban_suggest: ''
+        '422':
+          description: IBAN failed validation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  iban:
+                    type: string
+                  valid:
+                    type: boolean
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  valid_more:
+                    $ref: '#/components/schemas/Validations'
+              examples:
+                Example of failed validation:
+                  value:
+                    iban: DX89370400440532013000
+                    valid: 'false'
+                    status:
+                      code: '422'
+                      message: Unprocessable Entity
+                      more_info: 'Input is not a valid IBAN. See valid_more for more information, if available.'
+                    valid_more:
+                      country_valid: 'false'
+                      bban_length_valid: 'false'
+                      iban_length_valid: 'false'
+                      bban_format_valid: 'false'
+                      iban_format_valid: 'false'
+                      iban_checksum_valid: 'false'
+                      national_checksum_valid: 'false'
+                      iban_suggest: DE89370400440532013000
+    parameters:
+      - schema:
+          type: string
+        name: iban
+        in: path
+        required: true
+        description: A candidate IBAN to validate
+components:
+  schemas:
+    Validations:
+      title: Validation suite
+      type: object
+      x-examples: {}
+      description: ''
+      x-tags:
+        - models
+      properties:
+        country_valid:
+          type: boolean
+          description: Do first two characters represent a valid IBAN country?
+        bban_length_valid:
+          type: boolean
+          description: Is the BBAN implicit in the IBAN of a valid length for the country?
+        iban_length_valid:
+          type: boolean
+          description: Is the IBAN length valid for the country?
+        bban_format_valid:
+          type: boolean
+          description: Is the BBAN implicit in the IBAN of a valid format for the country?
+        iban_format_valid:
+          type: boolean
+          description: Is the IBAN format valid?
+        iban_checksum_valid:
+          type: boolean
+          description: Is the IBAN checksum valid?
+        national_checksum_valid:
+          type: boolean
+          description: Is the national checksum valid for the country?
+        iban_suggest:
+          type: string
+          description: 'In case of a failed validation, this field attempts to provide a workable correction. Do not take this suggestion too seriously, and certainly DO NOT RELY ON IT for transferring funds.'
+    Meta:
+      title: Meta
+      type: object
+      x-tags:
+        - models
+      properties:
+        code:
+          type: string
+          description: REST HTTP response code
+        message:
+          type: string
+          description: REST HTTP response description
+        more_info:
+          type: string
+          description: 'More information about the result, if available'
+  securitySchemes:
+    apiKey:
+      name: apiKey
+      type: apiKey
+      in: query
+      description: 'To use this API, an API key is required. Get one for free at [https://ibanfox.com/register](https://ibanfox.com/register).'
+externalDocs:
+  description: IBANfox Documentation
+  url: 'https://ibanfox.com/docs'
+security:
+  - API Key - 1: []
