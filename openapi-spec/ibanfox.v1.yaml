@@ -20,7 +20,7 @@ paths:
     get:
       summary: Validate an IBAN
       operationId: validateIBAN
-      description: 'Given a candidate IBAN, returns the results of a validation, along with a suite of validation checks.'
+      description: 'Given a candidate IBAN, returns the result of a validation, along with a suite of validation checks.'
       parameters: []
       tags:
         - iban
