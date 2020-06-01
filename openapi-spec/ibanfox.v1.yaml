@@ -77,8 +77,6 @@ components:
       title: Validation suite
       type: object
       x-examples: {}
-      x-tags:
-        - iban
       description: ''
       properties:
         country_valid:
@@ -105,6 +103,8 @@ components:
         iban_suggest:
           type: string
           description: 'In case of a failed validation, this field attempts to provide a workable correction. Do not take this suggestion too seriously, and certainly DO NOT RELY ON IT for transferring funds.'
+      x-tags:
+        - models
     Status:
       title: Status
       type: object
@@ -116,7 +116,7 @@ components:
         more_info:
           type: string
       x-tags:
-        - iban
+        - models
   securitySchemes:
     key:
       name: Key
