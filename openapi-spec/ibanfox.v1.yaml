@@ -23,7 +23,7 @@ paths:
     get:
       summary: Validate an IBAN
       operationId: validateIBAN
-      description: "Given a candidate IBAN, returns the result of a validation, along with a suite of validation checks.\n\nExample:\n\n```bash\ncurl --request GET \\\n--url 'https://api.ibanfox.com/v1/ibans/DE89370400440532013000/validate?apiKey=46w4e65e4q54e6' \n```"
+      description: "Given a candidate IBAN, returns the result of a validation, along with a suite of validation checks.\n\nExample:\n\n```bash\ncurl --request GET \\\n--url 'https://api.ibanfox.com/v1/ibans/DE89370400440532013000/validity?apiKey=46w4e65e4q54e6' \n```"
       parameters: []
       tags:
         - ibans
