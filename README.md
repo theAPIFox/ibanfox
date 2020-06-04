@@ -1,4 +1,3 @@
-
 # IBAN API by IBANfox
 
 IBANfox offers a simple REST-based JSON API enabling you to check the validity of IBAN numbers*.
