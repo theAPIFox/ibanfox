@@ -2,9 +2,12 @@ openapi: 3.0.0
 servers:
   - url: 'https://api.ibanfox.com/v1'
 info:
-  description: A simple API to validate an IBAN
+  description: |-
+    An API to perform operations on IBAN and SWIFT/BIC numbers.
+
+    This source of this document is an OpenAPI 3 document which lives at https://github.com/theAPIfox/ibanfox
   version: 1.0.0
-  title: IBAN Validator
+  title: IBAN API
   contact:
     email: hello@ibanfox.com
     name: IBANfox Support
@@ -16,14 +19,14 @@ info:
 tags:
   - name: iban
 paths:
-  '/ibans/{iban}/validate':
+  '/ibans/{iban}/validity':
     get:
       summary: Validate an IBAN
       operationId: validateIBAN
-      description: 'Given a candidate IBAN, returns the result of a validation, along with a suite of validation checks.'
+      description: "Given a candidate IBAN, returns the result of a validation, along with a suite of validation checks.\n\nExample:\n\n```bash\ncurl --request GET \\\n--url 'https://api.ibanfox.com/v1/ibans/DE89370400440532013000/validity?apiKey=46w4e65e4q54e6' \n```"
       parameters: []
       tags:
-        - iban
+        - ibans
       responses:
         '200':
           description: IBAN passed validation
@@ -98,6 +101,8 @@ paths:
                       iban_checksum_valid: 'false'
                       national_checksum_valid: 'false'
                       iban_suggest: DE89370400440532013000
+      security:
+        - apiKey: []
     parameters:
       - schema:
           type: string
@@ -161,7 +166,7 @@ components:
       in: query
       description: 'To use this API, an API key is required. Get one for free at [https://ibanfox.com/register](https://ibanfox.com/register).'
 externalDocs:
-  description: IBANfox Documentation
+  description: "\uD83D\uDCD6 IBANfox Documentation"
   url: 'https://ibanfox.com/docs'
 security:
   - API Key - 1: []
