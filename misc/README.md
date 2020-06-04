@@ -1,6 +1,10 @@
-The SWIFTRef OpenAPI specification sourced from https://aapi.io/.
+# SWIFTRef OpenAPI specification 
 
-Description from https://aapi.io/api-directory/SWIFT_SWIFTRef_SWIFTRefAPI_1.0.0 (with addenda):
+Sourced from https://aapi.io/.
+
+## Description 
+
+From https://aapi.io/api-directory/SWIFT_SWIFTRef_SWIFTRefAPI_1.0.0 (with addenda):
 
 | F | SWIFT |
 |-|-|
