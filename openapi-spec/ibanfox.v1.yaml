@@ -17,7 +17,7 @@ info:
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
   termsOfService: 'https://ibanfox.com/terms'
 tags:
-  - name: iban
+  - name: ibans
 paths:
   '/ibans/{iban}/validity':
     get:
