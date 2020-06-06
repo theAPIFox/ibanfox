@@ -29,4 +29,4 @@ Need any assistance? Get in touch with with us at hello@ibanfox.com.
 All usage of the IBANfox website, API, and services is subject to the IBANfox [Terms & Conditions](https://ibanfox.com/terms).
 
 ----
-\* ["RAS syndrome"](https://en.wikipedia.org/wiki/RAS_syndrome) at play :-)
+\* "IBAN numbers": [RAS syndrome](https://en.wikipedia.org/wiki/RAS_syndrome) at play :-)
