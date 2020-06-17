@@ -110,6 +110,36 @@ paths:
         in: path
         required: true
         description: A candidate IBAN to validate
+  '/ibans/{iban}':
+    parameters:
+      - schema:
+          type: string
+        name: iban
+        in: path
+        required: true
+    get:
+      summary: Get details for an IBAN
+      tags:
+        - ibans
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  iban:
+                    type: string
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  details:
+                    $ref: '#/components/schemas/IbanDetails'
+      operationId: get-ibans-iban
+      description: "Given a valid IBAN, returns its component parts.\n\nExample:\n\n```bash\ncurl --request GET \\\n--url 'https://api.ibanfox.com/v1/ibans/DE89370400440532013000?apiKey=46w4e65e4q54e6' \n```"
+      security:
+        - apiKey: []
 components:
   schemas:
     Validations:
@@ -159,6 +189,20 @@ components:
         more_info:
           type: string
           description: 'More information about the result, if available'
+    IbanDetails:
+      title: IbanDetails
+      type: object
+      properties:
+        country_code:
+          type: string
+        bank_id:
+          type: string
+        branch_id:
+          type: string
+        account_number:
+          type: string
+        checksum:
+          type: string
   securitySchemes:
     apiKey:
       name: apiKey
