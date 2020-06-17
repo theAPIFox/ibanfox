@@ -123,7 +123,7 @@ paths:
         - ibans
       responses:
         '200':
-          description: IBAN is valid and its components are returned
+          description: The IBAN is valid and its components are returned
           headers: {}
           content:
             application/json:
@@ -141,7 +141,7 @@ paths:
                   - iban
                   - meta
         '422':
-          description: "The IBAN is invalid, so its components cannot be returned. Response object \"details\" will be empty. \n\nYou may wish to try method `/ibans/{iban}/validity` to determine which part of the IBAN is invalid."
+          description: "The IBAN is invalid, so its components cannot be returned. The properties of response object \"details\" will be empty. \n\nYou may wish to try method `/ibans/{iban}/validity` to determine which part of the IBAN is invalid."
           content:
             application/json:
               schema:
