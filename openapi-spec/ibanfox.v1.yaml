@@ -6,7 +6,7 @@ info:
     An API to perform operations on IBAN and SWIFT/BIC numbers.
 
     This source of this document is an OpenAPI 3 document which lives at https://github.com/theAPIfox/ibanfox
-  version: 1.0.0
+  version: '1.0'
   title: IBAN API
   contact:
     email: hello@ibanfox.com
