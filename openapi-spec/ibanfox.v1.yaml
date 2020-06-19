@@ -22,8 +22,8 @@ paths:
   '/ibans/{iban}/validity':
     get:
       summary: Validate an IBAN
-      operationId: validateIBAN
-      description: "Given a candidate IBAN, returns the result of a validation, along with a suite of validation checks.\n\nExample:\n\n```bash\ncurl --request GET \\\n--url 'https://api.ibanfox.com/v1/ibans/DE89370400440532013000/validity?apiKey=46w4e65e4q54e6' \n```"
+      operationId: validateIban
+      description: "Given a candidate IBAN, returns the result of a validation, along with a suite of validation checks.\n\nExample:\n\n```bash\ncurl --request GET \\\n--url 'https://api.ibanfox.com/v1/ibans/DE89370400440532013000/validity' \\\n--header 'x-api-key: 46w4e65e4q54e6'\n```"
       parameters: []
       tags:
         - ibans
@@ -102,7 +102,7 @@ paths:
                       national_checksum_valid: 'false'
                       iban_suggest: DE89370400440532013000
       security:
-        - apiKey: []
+        - API key: []
     parameters:
       - schema:
           type: string
@@ -174,9 +174,9 @@ paths:
                       message: Unprocessable Entity
                       more_info: Invalid IBAN
       operationId: getIbanDetails
-      description: "Given a valid IBAN, returns its component parts.\n\nExample:\n\n```bash\ncurl --request GET \\\n--url 'https://api.ibanfox.com/v1/ibans/DE89370400440532013000?apiKey=46w4e65e4q54e6' \n```"
+      description: "Given a valid IBAN, returns its component parts.\n\nExample:\n\n```bash\ncurl --request GET \\\n--url 'https://api.ibanfox.com/v1/ibans/DE89370400440532013000'  \\\n--header 'x-api-key: 46w4e65e4q54e6'\n```"
       security:
-        - apiKey: []
+        - API key: []
 components:
   schemas:
     Validations:
@@ -253,10 +253,10 @@ components:
       x-tags:
         - models
   securitySchemes:
-    apiKey:
-      name: apiKey
+    API key:
+      name: x-api-key
       type: apiKey
-      in: query
+      in: header
       description: 'To use this API, an API key is required. Get one for free at [https://ibanfox.com/register](https://ibanfox.com/register).'
 externalDocs:
   description: "\uD83D\uDCD6 IBANfox Documentation"
