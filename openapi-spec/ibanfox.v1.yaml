@@ -165,8 +165,14 @@ paths:
                     type: string
                   meta:
                     $ref: '#/components/schemas/Meta'
-                  details:
-                    $ref: '#/components/schemas/IbanDetails'
+              examples:
+                Example of response to IBAN whose details cannot be extracted:
+                  value:
+                    iban: DE89370400440000
+                    status:
+                      code: '422'
+                      message: Unprocessable Entity
+                      more_info: Invalid IBAN
       operationId: get-ibans-iban
       description: "Given a valid IBAN, returns its component parts.\n\nExample:\n\n```bash\ncurl --request GET \\\n--url 'https://api.ibanfox.com/v1/ibans/DE89370400440532013000?apiKey=46w4e65e4q54e6' \n```"
       security:
