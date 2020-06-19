@@ -227,15 +227,15 @@ components:
           type: string
           description: 'More information about the result, if available'
         links:
-          type: object
+          type: array
           description: 'Links to additional information, if available'
-          properties:
-            rel:
-              type: string
-              description: The type of additional information
-            link:
-              type: string
-              description: The URL of additional information
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              link:
+                type: string
     IbanDetails:
       title: IbanDetails
       type: object
