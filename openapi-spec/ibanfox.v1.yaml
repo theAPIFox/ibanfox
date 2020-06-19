@@ -143,17 +143,17 @@ paths:
               examples:
                 Example of IBAN details:
                   value:
-                    iban: DE89370400440532013000
+                    iban: GB29NWBK60161331926719
                     status:
                       code: '200'
                       message: OK
                       more_info: ''
                     details:
-                      country_code: DE
-                      bank_id: '37040044'
-                      branch_id: ''
-                      account_number: '0532013000'
-                      checksum: '89'
+                      country_code: GB
+                      bank_id: NWBK
+                      branch_id: '601613'
+                      account_number: '31926719'
+                      checksum: '29'
         '422':
           description: "The IBAN is invalid, so its components cannot be returned. The properties of response object \"details\" will be empty. \n\nYou may wish to try method `/ibans/{iban}/validity` to determine which part of the IBAN is invalid."
           content:
