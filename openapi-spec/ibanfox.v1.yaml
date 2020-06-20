@@ -108,8 +108,8 @@ paths:
           type: string
           format: ''
           deprecated: false
-          minLength: 5
-          maxLength: 10
+          minLength: ''
+          maxLength: ''
         name: iban
         in: path
         required: true
