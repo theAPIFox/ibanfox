@@ -102,10 +102,14 @@ paths:
                       national_checksum_valid: 'false'
                       iban_suggest: DE89370400440532013000
       security:
-        - API key: []
+        - API-key: []
     parameters:
       - schema:
           type: string
+          format: ''
+          deprecated: false
+          minLength: 5
+          maxLength: 10
         name: iban
         in: path
         required: true
@@ -176,7 +180,7 @@ paths:
       operationId: getIbanDetails
       description: "Given a valid IBAN, returns its component parts.\n\nExample:\n\n```bash\ncurl --request GET \\\n--url 'https://api.ibanfox.com/v1/ibans/DE89370400440532013000'  \\\n--header 'x-api-key: 46w4e65e4q54e6'\n```"
       security:
-        - API key: []
+        - API-key: []
 components:
   schemas:
     Validations:
@@ -253,7 +257,7 @@ components:
       x-tags:
         - models
   securitySchemes:
-    API key:
+    API-key:
       name: x-api-key
       type: apiKey
       in: header
