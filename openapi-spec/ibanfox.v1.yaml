@@ -29,19 +29,22 @@ paths:
         - ibans
       responses:
         '200':
-          description: IBAN passed validation
+          description: "IBAN validation performed successfully. Check property `valid` for validity of IBAN. \n\nNote: An HTTP status 200 means that the HTTP request and response were successful, NOT that the IBAN is valid."
           content:
             application/json:
               schema:
                 type: object
                 description: ''
                 properties:
-                  iban:
-                    type: string
-                    description: The IBAN to validate
-                  valid:
-                    type: boolean
-                    description: Is the IBAN valid?
+                  data:
+                    type: object
+                    properties:
+                      iban:
+                        type: string
+                        description: The IBAN to validate
+                      valid:
+                        type: boolean
+                        description: Is the IBAN valid?
                   meta:
                     $ref: '#/components/schemas/Meta'
                   valid_more:
@@ -53,45 +56,22 @@ paths:
               examples:
                 Example of passed validation:
                   value:
-                    iban: DE89370400440532013000
-                    valid: 'true'
+                    data:
+                      iban: DE89370400440532013000
+                      valid: 'true'
                     status:
-                      code: '200'
-                      message: OK
+                      code: 10210
+                      message: Valid IBAN
                       more_info: ''
-                    valid_more:
-                      country_valid: 'true'
-                      bban_length_valid: 'true'
-                      iban_length_valid: 'true'
-                      bban_format_valid: 'true'
-                      iban_format_valid: 'true'
-                      iban_checksum_valid: 'true'
-                      national_checksum_valid: 'true'
-                      iban_suggest: ''
-        '422':
-          description: IBAN failed validation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  iban:
-                    type: string
-                  valid:
-                    type: boolean
-                  meta:
-                    $ref: '#/components/schemas/Meta'
-                  valid_more:
-                    $ref: '#/components/schemas/Validations'
-              examples:
-                Example of failed validation:
+                Example of a failed validation:
                   value:
-                    iban: DX89370400440532013000
-                    valid: 'false'
+                    data:
+                      iban: DX89370400440532013000
+                      valid: 'false'
                     status:
-                      code: '422'
-                      message: Unprocessable Entity
-                      more_info: 'Input is not a valid IBAN. See valid_more for more information, if available.'
+                      code: 10422
+                      message: Invalid IBAN
+                      more_info: Input is not a valid IBAN. See `valid_more` for more information.
                     valid_more:
                       country_valid: 'false'
                       bban_length_valid: 'false'
@@ -112,8 +92,8 @@ paths:
           maxLength: ''
         name: iban
         in: path
-        required: true
         description: A candidate IBAN to validate
+        required: true
   '/ibans/{iban}':
     parameters:
       - schema:
@@ -222,29 +202,27 @@ components:
         - models
       properties:
         code:
-          type: string
-          description: REST HTTP response code
+          type: number
+          description: Internal response code
         message:
           type: string
-          description: REST HTTP response description
+          description: Internal response description
         more_info:
           type: string
           description: 'More information about the result, if available'
-        links:
-          type: array
-          description: 'Links to additional information, if available'
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-              link:
-                type: string
+      required:
+        - code
+        - message
+        - more_info
     IbanDetails:
       title: IbanDetails
       type: object
+      x-tags:
+        - models
       properties:
         country_code:
+          type: string
+        checksum:
           type: string
         bank_id:
           type: string
@@ -252,10 +230,12 @@ components:
           type: string
         account_number:
           type: string
-        checksum:
-          type: string
-      x-tags:
-        - models
+      required:
+        - country_code
+        - checksum
+        - bank_id
+        - branch_id
+        - account_number
   securitySchemes:
     API-key:
       name: x-api-key
