@@ -128,15 +128,21 @@ paths:
               schema:
                 type: object
                 properties:
-                  iban:
-                    type: string
-                    description: The IBAN from the request
+                  data:
+                    type: object
+                    required:
+                      - iban
+                    properties:
+                      iban:
+                        type: string
+                      valid:
+                        type: boolean
+                      details:
+                        $ref: '#/components/schemas/IbanDetails'
                   meta:
                     $ref: '#/components/schemas/Meta'
-                  details:
-                    $ref: '#/components/schemas/IbanDetails'
                 required:
-                  - iban
+                  - data
                   - meta
               examples:
                 Example of IBAN details:
