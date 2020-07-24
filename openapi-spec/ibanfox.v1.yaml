@@ -23,13 +23,25 @@ paths:
     get:
       summary: Validate an IBAN
       operationId: validateIban
-      description: "Given a candidate IBAN, returns the result of a validation, along with a suite of validation checks.\n\nExample:\n\n```bash\ncurl --request GET \\\n--url 'https://api.ibanfox.com/v1/ibans/DE89370400440532013000/validity' \\\n--header 'x-api-key: 46w4e65e4q54e6'\n```"
+      description: |-
+        Given a candidate IBAN, returns the result of a validation, along with a suite of validation checks.
+
+        Example:
+
+        ```bash
+        curl --request GET \
+        --url 'https://api.ibanfox.com/v1/ibans/DE89370400440532013000/validity' \
+        --header 'x-api-key: 46w4e65e4q54e6'
+        ```
       parameters: []
       tags:
         - ibans
       responses:
         '200':
-          description: "IBAN validation performed successfully. Check property `valid` for validity of IBAN. \n\nNote: An HTTP status 200 means that the HTTP request and response were successful, NOT that the IBAN is valid."
+          description: |-
+            IBAN validation performed successfully. Check property `valid` for validity of IBAN. 
+
+            Note: An HTTP status 200 means that the HTTP request and response were successful, NOT that the IBAN is valid.
           content:
             application/json:
               schema:
@@ -38,6 +50,9 @@ paths:
                 properties:
                   data:
                     type: object
+                    required:
+                      - iban
+                      - valid
                     properties:
                       iban:
                         type: string
@@ -50,8 +65,7 @@ paths:
                   valid_more:
                     $ref: '#/components/schemas/Validations'
                 required:
-                  - iban
-                  - valid
+                  - data
                   - meta
               examples:
                 Example of passed validation:
@@ -139,7 +153,10 @@ paths:
                       account_number: '31926719'
                       checksum: '29'
         '422':
-          description: "The IBAN is invalid, so its components cannot be returned. The properties of response object \"details\" will be empty. \n\nYou may wish to try method `/ibans/{iban}/validity` to determine which part of the IBAN is invalid."
+          description: |-
+            The IBAN is invalid, so its components cannot be returned. The properties of response object "details" will be empty. 
+
+            You may wish to try method `/ibans/{iban}/validity` to determine which part of the IBAN is invalid.
           content:
             application/json:
               schema:
@@ -158,7 +175,16 @@ paths:
                       message: Unprocessable Entity
                       more_info: Invalid IBAN
       operationId: getIbanDetails
-      description: "Given a valid IBAN, returns its component parts.\n\nExample:\n\n```bash\ncurl --request GET \\\n--url 'https://api.ibanfox.com/v1/ibans/DE89370400440532013000'  \\\n--header 'x-api-key: 46w4e65e4q54e6'\n```"
+      description: |-
+        Given a valid IBAN, returns its component parts.
+
+        Example:
+
+        ```bash
+        curl --request GET \
+        --url 'https://api.ibanfox.com/v1/ibans/DE89370400440532013000'  \
+        --header 'x-api-key: 46w4e65e4q54e6'
+        ```
       security:
         - API-key: []
 components:
@@ -243,7 +269,7 @@ components:
       in: header
       description: 'To use this API, an API key is required. Get one for free at [https://ibanfox.com/register](https://ibanfox.com/register).'
 externalDocs:
-  description: "\uD83D\uDCD6 IBANfox Documentation"
+  description: "\U0001F4D6 IBANfox Documentation"
   url: 'https://ibanfox.com/docs'
 security:
   - API Key - 1: []
